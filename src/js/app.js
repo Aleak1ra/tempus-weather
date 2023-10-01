@@ -48,13 +48,18 @@ function getCurrentLocationWeather(lat, lon) {
 
 function getCityWeather(cityName) {
 
-    weatherIcon.src=`/assets/loading-icon.svg`
+    weatherIcon.src=`./src/assets/loading-icon.svg`
 
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&lang=pt_br&appid=${api_key}`)
     .then( (response) => response.json())
     .then( (data) =>  displayWeather(data))
     
 }
+
+function capitalizeFirstLetter(string) { //funcao para pegar o dado json e colocar a primeira letra maiuscula
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 
 function displayWeather(data) {
    let = {
@@ -68,8 +73,8 @@ function displayWeather(data) {
 
    currentDate.textContent = formatDate(dt)
    cityName.textContent= name;
-   weatherIcon.src = `/assets/${icon}.svg`
-   weatherDescription.textContent = description;
+   weatherIcon.src = `./src/assets/${icon}.svg`
+   weatherDescription.textContent = capitalizeFirstLetter(description);
    currentTemperature.textContent = `${Math.round(temp)}C°`;
    windSpeed.textContent = `${Math.round(speed * 3.6)} km`
    feelsLikeTemperature.textContent = `${Math.round(feels_like)}C°`;;
